@@ -1,0 +1,27 @@
+.todoCard {
+  border-radius: 4px;
+  margin: 8px 24px;
+  padding: 4px 8px;
+  box-shadow: 0 0 4px 0 #0009;
+  transition: .05s;
+}
+
+.todoCard:active {
+  box-shadow: 0 0 2px 0 #0009;
+}
+
+.pendingCard {
+  background-color: whitesmoke;
+}
+
+.pendingCard:hover {
+  background-color: #efe;
+}
+
+.doneCard {
+  color: #00000099;
+}
+
+.doneCard:hover {
+  background-color: #fdd;
+}
