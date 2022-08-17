@@ -1,27 +1,60 @@
 .todoCard {
   border-radius: 4px;
   margin: 8px 24px;
-  padding: 4px 8px;
+  padding: 8px 12px;
+  min-width: 300px;
   box-shadow: 0 0 4px 0 #00000099;
   transition: .05s;
 }
 
-.todoCard:active {
-  box-shadow: 0 0 2px 0 #00000099;
+.todoHeader {
+  display: flex;
+  align-items: center;
+  height: min-content;
+  width: 100%;
+  margin-bottom: 12px;
+  justify-content: space-between;
 }
 
-.pendingCard {
-  background-color: whitesmoke;
+.cardTitle {
+  margin: 0;
 }
 
-.pendingCard:hover {
-  background-color: #efe;
+.cancelButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  width: 24px;
+  height: 24px;
+  transition: .1s;
+}
+
+.cancelButton:hover {
+  cursor: pointer;
+  background-color: #fafafa33;
+}
+
+.cancelButton:active {
+  transform: scale(.99);
+  box-shadow: inset 0 0 1px #00000099;
+}
+
+.cancelIcon {
+  font-size: 12px;
 }
 
 .doneCard {
-  color: #00000033;
+  color: #00000099;
+  background-color: #00000033;
 }
 
-.doneCard:hover {
-  background-color: #fdd;
+.pendingCard {
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

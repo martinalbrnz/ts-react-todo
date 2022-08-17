@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./home.module.css";
 import TodoCard from "../TodoCard";
 import TodoForm from "../TodoForm";
 
@@ -59,11 +60,11 @@ const Home = () => {
         return {
           ...todo,
           title,
-          description
-        }
-      } 
+          description,
+        };
+      }
       return todo;
-    })
+    });
     setTodoList(updatedList);
   };
   const chooseToUpdate = (id: number): void => {
@@ -89,8 +90,8 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h1>TODO:</h1>
+    <div className={styles.homeContainer}>
+      <h1 className={styles.homeTitle}>TODO:</h1>
       {addTodoModal && (
         <TodoForm
           addTask={addTask}
@@ -100,8 +101,8 @@ const Home = () => {
           updateTask={updateTask}
         />
       )}
-      <button onClick={openAddTask}>Add task</button>
-      <div>
+      <div className={styles.addTaskFAB} onClick={openAddTask}><i className={`${styles.FABIcon} fa-solid fa-plus`}></i></div>
+      <div className={styles.taskContainer}>
         {todoList.map((todo) => {
           return (
             <TodoCard

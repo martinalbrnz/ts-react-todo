@@ -46,28 +46,43 @@ const TodoForm = ({
     }
   };
   return (
-    <div className={styles.todoBackground}>
-      <div className={styles.todoContainer}>
-        <form>
-          <label htmlFor="title">Title</label>
+    <div className={styles.formBackground}>
+      <div className={styles.formContainer}>
+        <div className={styles.formHeader}>
+          <h2 className={styles.formTitle}>
+            {editID > 0 ? "Update" : "New"} task
+          </h2>
+          <div className={styles.cancelButton} onClick={closeAddTask}>
+            <i className={`${styles.cancelIcon} fa-solid fa-remove`}></i>
+          </div>
+        </div>
+        <form className={styles.todoForm}>
+          <label className={styles.formLabel} htmlFor="title">
+            Title
+          </label>
           <input
+            className={styles.formInput}
             type="text"
             name="title"
             id="title"
             value={title}
             onChange={handleTitleChange}
           />
-          <label htmlFor="description">Description</label>
+          <label className={styles.formLabel} htmlFor="description">
+            Description
+          </label>
           <input
+            className={styles.formInput}
             type="text"
             name="description"
             id="description"
             value={description}
             onChange={handleDescriptionChange}
           />
-          <button onClick={handleSubmit}>Save</button>
+          <button className={styles.saveButton} onClick={handleSubmit}>
+            Save
+          </button>
         </form>
-        <button onClick={closeAddTask}>Cancel</button>
       </div>
     </div>
   );
