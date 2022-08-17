@@ -37,6 +37,7 @@ const Home = () => {
   ];
   const [todoList, setTodoList] = useState(initTodo);
   const [addTodoModal, setAddTodoModal] = useState(false);
+  const [editID, setEditID] = useState(0);
   const addTask = (title: string, description: string): void => {
     const id: number = todoList.reduce((prev, curr) => {
       if (prev <= curr.id) {
@@ -51,6 +52,23 @@ const Home = () => {
       done: false,
     };
     setTodoList([...todoList, newTodo]);
+  };
+  const updateTask = (id: number, title: string, description: string) => {
+    const updatedList = todoList.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          title,
+          description
+        }
+      } 
+      return todo;
+    })
+    setTodoList(updatedList);
+  };
+  const chooseToUpdate = (id: number): void => {
+    setAddTodoModal(true);
+    setEditID(id);
   };
   const deleteTask = (id: number): void => {
     const remainingTasks = todoList.filter((todo) => todo.id !== id);
@@ -67,13 +85,20 @@ const Home = () => {
   };
   const closeAddTask = () => {
     setAddTodoModal(false);
+    setEditID(0);
   };
 
   return (
     <div>
       <h1>TODO:</h1>
       {addTodoModal && (
-        <TodoForm addTask={addTask} closeAddTask={closeAddTask} />
+        <TodoForm
+          addTask={addTask}
+          closeAddTask={closeAddTask}
+          editID={editID}
+          todoList={todoList}
+          updateTask={updateTask}
+        />
       )}
       <button onClick={openAddTask}>Add task</button>
       <div>
@@ -84,6 +109,7 @@ const Home = () => {
               task={todo}
               deleteTask={deleteTask}
               toggleDone={toggleDone}
+              chooseToUpdate={chooseToUpdate}
             />
           );
         })}

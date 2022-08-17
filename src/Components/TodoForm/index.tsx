@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./todoForm.module.css";
 interface TodoFormProps {
   addTask(title: string, description: string): void;
   closeAddTask(): void;
+  editID: number;
+  todoList: Array<any>;
+  updateTask(id: number, title: string, description: string): void;
 }
-const TodoForm = ({ addTask, closeAddTask }: TodoFormProps) => {
+const TodoForm = ({
+  addTask,
+  closeAddTask,
+  editID,
+  todoList,
+  updateTask,
+}: TodoFormProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  useEffect(() => {
+    if (editID > 0) {
+      const initTask = todoList.find((todo) => todo.id === editID);
+      setTitle(initTask.title);
+      setDescription(initTask.description);
+    }
+  }, [editID, todoList]);
   const handleTitleChange = (e: any) => {
     setTitle(e.target.value);
   };
@@ -17,11 +33,16 @@ const TodoForm = ({ addTask, closeAddTask }: TodoFormProps) => {
     setTitle("");
     setDescription("");
   };
-  const handleAddTask = (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (title !== "" && description !== "") {
-      addTask(title, description);
+      if (editID > 0) {
+        updateTask(editID, title, description);
+      } else {
+        addTask(title, description);
+      }
       clearInput();
+      closeAddTask();
     }
   };
   return (
@@ -44,9 +65,9 @@ const TodoForm = ({ addTask, closeAddTask }: TodoFormProps) => {
             value={description}
             onChange={handleDescriptionChange}
           />
-          <button onClick={handleAddTask}>Add task</button>
+          <button onClick={handleSubmit}>Save</button>
         </form>
-          <button onClick={closeAddTask}>Cancel</button>
+        <button onClick={closeAddTask}>Cancel</button>
       </div>
     </div>
   );
